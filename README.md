@@ -1,18 +1,35 @@
-# AI Support Ticket Prioritizer
 
-## Run
-```bash
-docker compose up --build          # Postgres + FastAPI on :8000
-cd frontend && npm install && npm run dev   # React on :5173
-```
-API docs: http://localhost:8000/docs
+# Ticket Prioritizer
 
-## How scoring works (backend/nlp.py)
-score (0-100) = category weight + customer plan + negative sentiment
-+ urgent keywords + legal/churn risk + waiting-time boost.
-P1 >= 70, P2 >= 45, P3 >= 20, else P4. Every ticket stores its `reasons`.
+A tool that automatically prioritizes customer support tickets using NLP, so urgent issues get attention first.
 
-## Improve it
-- Replace SEED in nlp.py with your real labelled tickets.
-- Swap TF-IDF for a transformer (e.g. sentence-transformers) for better accuracy.
-- Add auth, Alembic migrations, and webhooks from Zendesk/Freshdesk/email.
+## Features
+- Reads incoming support tickets
+- Scores each ticket by urgency using NLP
+- Shows a sorted support queue
+
+## Tech Stack
+- Backend: Python
+- Frontend: React + Vite
+- Database: SQLite
+- Deployment: Docker
+
+## How to Run
+
+### Option 1: Docker
+docker-compose up --build
+
+### Option 2: Manually
+Backend:
+cd backend
+pip install -r requirements.txt
+
+Frontend:
+cd frontend
+npm install
+npm run dev
+
+Then open the URL shown in the terminal (usually http://localhost:5173).
+
+## Author
+ny645211-source
